@@ -6,6 +6,10 @@ jobs:
   demo:
     runs-on: ubuntu-latest
 
+    outputs:
+      version: ${{ steps.generate.outputs.version }}
+      
+
     steps:
       - name: generate version
         id: generate
@@ -20,6 +24,15 @@ jobs:
         env:
           VERSION: ${{ steps.generate.outputs.version }}
         run: echo "version is $VERSION"
+
+  display:
+    runs-on: ubuntu-latest
+    needs: demo
+    steps:
+      - name: consuming var from demo
+        run: |
+          echo "value from demo: ${{ needs.demo.outputs.version }} "
+  
             
           
     
