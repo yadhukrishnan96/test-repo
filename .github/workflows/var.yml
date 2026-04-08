@@ -1,0 +1,25 @@
+name: var via output
+on: workflow_dispatch
+
+
+jobs:
+  demo:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: generate version
+        id: generate
+        run: | 
+          VERSION='0.1'
+          echo "version=$VERSION" >> $GITHUB_OUTPUT
+          
+      - name: use version
+        run: echo "version is ${{ steps.generate.outputs.version }}"
+
+      - name: version via env
+        env:
+          VERSION: ${{ steps.generate.outcome.version }}
+        run: echo "version is $VERSION"
+            
+          
+    
