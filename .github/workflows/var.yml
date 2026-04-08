@@ -18,7 +18,7 @@ jobs:
 
       - name: version via env
         env:
-          VERSION: ${{ steps.generate.outcome.version }}
+          VERSION: ${{ steps.generate.outputs.version }}
         run: echo "version is $VERSION"
             
           
