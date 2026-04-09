@@ -20,4 +20,5 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           gh pr comment ${{ github.event.pull_request.number }} \
-            --body "Build passed ✅"
+          --repo owner/repo \  
+          --body "Build passed ✅"
