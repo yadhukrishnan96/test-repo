@@ -11,6 +11,7 @@ jobs:
     steps:
       - name: Show runner info
         run: |
+          echo $GITHUB_WORKSPACE
           echo "Hello from ${{ runner.os }}-${{ runner.arch }}"
           echo "Runner name (type): ${{ runner.name }}"
           echo "Container image:   $(grep PRETTY_NAME /etc/os-release)"
