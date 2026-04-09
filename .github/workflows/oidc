@@ -1,0 +1,28 @@
+name: AWS OIDC Authentication Test
+
+on:
+  push:
+    branches: [ "main" ]
+  workflow_dispatch:
+
+permissions:
+  id-token: write   # Required for requesting the JWT
+  contents: read    # Required for actions/checkout
+
+jobs:
+  AuthenticateAWS:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: arn:aws:iam::591563074970:role/gh-action-oidc-cloudwatch-logs
+          aws-region: us-east-1
+          # role-session-name: GitHubActionsSession (Optional)
+
+      - name: Verify Authentication
+        run: |
+          aws sts get-caller-identity
